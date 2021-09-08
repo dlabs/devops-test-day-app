@@ -5,7 +5,7 @@ A weather report and weather control API.
 * PostgreSQL
 * Redis
 * Rails 6
-* Sidekiq for background processing, uses sidekiq-scheduler for recurring fetching of weather reports.
+* Sidekiq for background processing, uses sidekiq-scheduler for recurring fetching of weather reports. As a separate container. 
 
 ## Local Install
 * Create Dockerfile and build image.
@@ -16,7 +16,7 @@ A weather report and weather control API.
 
 After setup, don't forget to run the seeds. (`rake db:seed`)
 
-## AWS EC2 Setup
+## AWS EC2 Setup (just for junior positions)
 * Use prebuilt AMI  in ireland region (ami-02a236ee2a2c5903a)
 * Deploy EC2 instance
 * Run special command to start application server inside application repository (`unicorn_rails -D -c config/unicorn.rb`) - application server is running on `localhost:8080`
@@ -91,3 +91,5 @@ PATCH /weather_reports/:id
   * Find redis host in sidekiq initializers file
   * Start rails application with `bash -c bundle exec rails server -p 3000 -b '0.0.0.0'`
   * Start sidekiq with `bash -c "bundle exec sidekiq -C config/sidekiq.yml`
+  * If you can't deploy sidekiq container you can use `rails console` and run `OpenWeatherService.new.fetch_reports!`
+  * If you have any questions ping me on matej.ferenc@dlabs.si or devops@dlabs.si
